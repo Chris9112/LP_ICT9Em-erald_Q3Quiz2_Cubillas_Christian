@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ticketing Center</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+<style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            margin: 5px 0;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 10px;
+            text-align: center;
+            background-color: #343a40;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Ticketing Center</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#buy-tickets">Buy Tickets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Pricing</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="container mt-5 content">
+        <h1>Ticketing Center</h1>
+        <p>Use this page to buy tickets for events and view the pricing. Click the buttons to toggle actions and display ticket prices.</p>
+
+        
+        <h2 id="buy-tickets">Buy Tickets</h2>
+        <p>Select the number of tickets you want to buy, and then toggle to calculate the total price.</p>
+
+        <div class="mb-3">
+            <label for="ticketCount" class="form-label">Number of Tickets:</label>
+            <input type="number" class="form-control" id="ticketCount" placeholder="Enter number of tickets">
+        </div>
+
+        
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="toggleVIP" ontoggle="toggleVIP()" onchange="toggleVIP()">
+            <label class="form-check-label" for="toggleVIP">VIP Ticket (Extra Php20)</label>
+        </div>
+
+        <button class="btn btn-primary" onclick="calculatePrice()">Calculate Total Price</button>
+        <p id="ticketResult" class="result mt-3"></p>
+
+        
+        <h2 id="pricing">Ticket Pricing</h2>
+        <p>Standard Ticket: Php50</p>
+        <p>VIP Ticket: Php70 (includes extra benefits)</p>
+
+    </div>
+
+    
+    <footer>
+        <p>No reserving of tickets, reserving or bribing of tickets is punishable by law.</p>
+    </footer>
+
+    
+    <script>
+        // Variables
+        let isVIP = false;  // Toggle for VIP
+
+        // Toggle VIP ticket status
+        function toggleVIP() {
+            isVIP = document.getElementById('toggleVIP').checked;  // Check the status of the VIP toggle
+        }
+
+        // Calculate total ticket price
+        function calculatePrice() {
+            let ticketCount = parseInt(document.getElementById("ticketCount").value);  // Get the number of tickets
+
+            // Check if ticket count is valid
+            if (isNaN(ticketCount) || ticketCount <= 0) {
+                document.getElementById("ticketResult").innerHTML = "Please enter a valid number of tickets.";
+                return;
+            }
+
+            // Calculate price based on VIP status
+            let pricePerTicket = isVIP ? 70 : 50;  // VIP ticket costs more
+            let totalPrice = pricePerTicket * ticketCount;  // Total price calculation
+
+            // Display result
+            document.getElementById("ticketResult").innerHTML = "Total Price: Php" + totalPrice;
+        }
+    </script>
+</body>
+</html>
